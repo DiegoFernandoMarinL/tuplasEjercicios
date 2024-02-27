@@ -34,4 +34,15 @@ panaderia = {
         {"nombre":"Donas","valor":3000}])}
 }
 
-print(panaderia["panes_salados"]["productos"][1])
+categoria = int(input("Digite categoria a comprar: "))
+if categoria == 1:
+    categoria = "panes_salados"
+    print(f"""Haz seleccionado la categoria: {categoria}""")
+elif categoria == 2:
+    categoria = "panes_dulces"
+    print(f"""Haz seleccionado la categoria: {categoria}""")
+elif categoria == 3:
+    categoria = "reposteria"   
+    print(f"""Haz seleccionado la categoria: {categoria}""")     
+producto = int(input("Digite producto a comprar: "))
+print(panaderia[categoria]["productos"][producto])
