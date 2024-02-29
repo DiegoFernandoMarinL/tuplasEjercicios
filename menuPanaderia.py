@@ -18,7 +18,7 @@ panaderia = {
     'Panes_dulces': {
         "productos":list([
             {"nombre":"Croissant","valor":3000,"cod":"11"},
-            {"nombre":"Rosca de Reyes","valor":2500,"cod":"12"},
+            {"nombre":"Rosca de Reyes","valor":4000,"cod":"12"},
             {"nombre":"Pan de muerto","valor":1500,"cod":"13"},
             {"nombre":"Pan de canela","valor":1700,"cod":"14"},
             {"nombre":"Pan de banana","valor":2300,"cod":"15"},
@@ -48,41 +48,66 @@ panaderia = {
             {"indice": 7, "nombre": "Descuento del 10% en la compra de 10", "unidades": 10, "descuento":0.10},
             {"indice": 8, "nombre": "Descuento del 2% en la compra de 3", "unidades": 3, "descuento":0.02}])}
 }
+carrito = 0
+x = "1"
+while x == "1":
+    print("-------PANADERIA PYTHON-------.")
 
-print("-------PANADERIA PYTHON-------.")
-
-listaCategoria = panaderia.keys()
-listaCategoria = list(listaCategoria)
-for i, val in enumerate(listaCategoria):
-    print(f"{i}. {val}")
-
-op = int(input("seleccione categoria a comprar: "))
-categoria = panaderia.get(listaCategoria[op])
-producto = categoria["productos"]
-
-for i, val in enumerate(producto):
-    print(f"{i}. {val}")
-
-op2 = int(input("Digite producto a comprar: "))
-categoria = panaderia.get(listaCategoria[op2])
-
-promociones = categoria["promociones"]
-promocion = list()
-for val in promociones:
-    if (val.get("indice") == op2):
-        promocion.append(val)
-
-if (len(promocion) != 0):
-    print(f""" Promociones del producto {categoria["productos"][op2]}""")
-    for i, val in enumerate(promocion):
+    listaCategoria = panaderia.keys()
+    listaCategoria = list(listaCategoria)
+    for i, val in enumerate(listaCategoria):
         print(f"{i}. {val}")
 
+    op = int(input("Seleccione categoria a comprar: "))
+    categoria = panaderia.get(listaCategoria[op])
+    producto = categoria["productos"]
 
+    for i, val in enumerate(producto):
+        print(f"{i}. {val}")
+
+    op2 = int(input("Seleccione producto a comprar: "))
+
+    categoria = panaderia.get(listaCategoria[op])
+    promociones = categoria["promociones"]
+    promocion = list()
+    for val in promociones:
+        if (val.get("indice") == op2):
+            promocion.append(val)
+
+    if (len(promocion) != 0):
+        print(f""" Promociones del producto {categoria["productos"][op2]}""")
+        for i, val in enumerate(promocion):
+            print(f"{i}. {val}")
+
+        op3 = int(input("Seleccione promocion que desea (NOTA: 9 para no aplicar ninguna promocion): "))
+        if (op3 != 9):
+            promo = categoria["promociones"][op3]
+            descuento = promo["descuento"]
+            unidades = promo["unidades"]
+
+            producto = categoria["productos"][op2]
+            descuento = producto["valor"] * unidades * descuento 
+            valTotal = producto["valor"] * unidades - descuento
+            print(f"El valor a cancelar es de: ${valTotal}")
+        else:
+            valTotal = categoria["productos"][op2]
+            valTotal = valTotal["valor"]  
+            print(f"El valor a cancelar es de: ${valTotal}")      
+    else:
+        valTotal = categoria["productos"][op2]
+        valTotal = valTotal["valor"]  
+        print(f"El valor a cancelar es de: ${valTotal}") 
     
-#pedido = panaderia[categoria]["productos"][producto]
-#nombre = pedido["nombre"]
-#valor = pedido["valor"]
-#cod = pedido["cod"]
+    carrito = carrito + valTotal
+    x = input(f"Desea escojer otro producto (Si=1 No=0) Carrito:{carrito}: ")
 
-
-#print(f"El producto seleccionado es: {nombre} con un valor de ${valor}")
+b = 1
+while b == 1:
+    pago = int(input("Ingrese dinero para el pago: $"))
+    if (pago >= valTotal):
+        vueltos = pago - valTotal
+        print(f"Sus vueltos son: {vueltos}")
+        b = 0
+    else:
+        print(f"El dinero ingresado no alcanza para el pago: Carrito:{carrito}  Pagp:{pago}") 
+        b = 1  
