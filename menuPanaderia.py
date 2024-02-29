@@ -91,11 +91,17 @@ while x == "1":
             print(f"El valor a cancelar es de: ${valTotal}")
         else:
             valTotal = categoria["productos"][op2]
-            valTotal = valTotal["valor"]  
+            producto = valTotal["nombre"]
+            valTotal = valTotal["valor"]
+            cantidad = int(input(f"Cuanta cantidad del producto {producto} desea comprar: "))
+            valTotal = valTotal * cantidad
             print(f"El valor a cancelar es de: ${valTotal}")      
     else:
         valTotal = categoria["productos"][op2]
+        producto = valTotal["nombre"]
         valTotal = valTotal["valor"]  
+        cantidad = int(input(f"Cuanta cantidad del producto {producto} desea comprar: "))
+        valTotal = valTotal * cantidad
         print(f"El valor a cancelar es de: ${valTotal}") 
     
     carrito = carrito + valTotal
@@ -104,10 +110,10 @@ while x == "1":
 b = 1
 while b == 1:
     pago = int(input("Ingrese dinero para el pago: $"))
-    if (pago >= valTotal):
-        vueltos = pago - valTotal
+    if (pago >= carrito):
+        vueltos = pago - carrito
         print(f"Sus vueltos son: {vueltos}")
         b = 0
     else:
-        print(f"El dinero ingresado no alcanza para el pago: Carrito:{carrito}  Pagp:{pago}") 
+        print(f"El dinero ingresado no alcanza para el pago: Carrito:{carrito}  Pago:{pago}") 
         b = 1  
