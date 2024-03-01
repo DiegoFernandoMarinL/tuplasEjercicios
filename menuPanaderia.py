@@ -58,14 +58,18 @@ while x == "1":
     for i, val in enumerate(listaCategoria):
         print(f"{i}. {val}")
 
+    print("-------------------------------------------------")
     op = int(input("Seleccione categoria a comprar: "))
+    print("-------------------------------------------------")
     categoria = panaderia.get(listaCategoria[op])
     producto = categoria["productos"]
 
     for i, val in enumerate(producto):
         print(f"{i}. {val}")
 
+    print("-------------------------------------------------")
     op2 = int(input("Seleccione producto a comprar: "))
+    print("-------------------------------------------------")
 
     categoria = panaderia.get(listaCategoria[op])
     promociones = categoria["promociones"]
@@ -75,11 +79,15 @@ while x == "1":
             promocion.append(val)
 
     if (len(promocion) != 0):
+        print("-------------------------------------------------")
         print(f""" Promociones del producto {categoria["productos"][op2]}""")
+        print("-------------------------------------------------")
         for i, val in enumerate(promocion):
             print(f"{i}. {val}")
 
+        print("-------------------------------------------------")
         op3 = int(input("Seleccione promocion que desea (NOTA: 9 para no aplicar ninguna promocion): "))
+        print("-------------------------------------------------")
         if (op3 != 9):
             promo = categoria["promociones"][op3]
             descuento = promo["descuento"]
@@ -89,31 +97,38 @@ while x == "1":
             descuento = producto["valor"] * unidades * descuento 
             valTotal = producto["valor"] * unidades - descuento
             print(f"El valor a cancelar es de: ${valTotal}")
+            print("-------------------------------------------------")
         else:
             valTotal = categoria["productos"][op2]
             producto = valTotal["nombre"]
-            valTotal = valTotal["valor"]
-            cantidad = int(input(f"Cuanta cantidad del producto {producto} desea comprar: "))
+            valTotal = valTotal["valor"]  
+            cantidad = int(input(f"Cuanta cantidad de {producto} desea comprar: "))
+            print("-------------------------------------------------")
             valTotal = valTotal * cantidad
             print(f"El valor a cancelar es de: ${valTotal}")      
+            print("-------------------------------------------------")
     else:
         valTotal = categoria["productos"][op2]
         producto = valTotal["nombre"]
         valTotal = valTotal["valor"]  
-        cantidad = int(input(f"Cuanta cantidad del producto {producto} desea comprar: "))
+        cantidad = int(input(f"Cuanta cantidad de {producto} desea comprar: "))
+        print("-------------------------------------------------")
         valTotal = valTotal * cantidad
         print(f"El valor a cancelar es de: ${valTotal}") 
+        print("-------------------------------------------------")
     
     carrito = carrito + valTotal
     x = input(f"Desea escojer otro producto (Si=1 No=0) Carrito:{carrito}: ")
+    print("-------------------------------------------------")
 
 b = 1
 while b == 1:
     pago = int(input("Ingrese dinero para el pago: $"))
+    print("-------------------------------------------------")
     if (pago >= carrito):
         vueltos = pago - carrito
         print(f"Sus vueltos son: {vueltos}")
         b = 0
     else:
-        print(f"El dinero ingresado no alcanza para el pago: Carrito:{carrito}  Pago:{pago}") 
+        print(f"El dinero ingresado no alcanza para el pago: Carrito:{carrito}  Pagp:{pago}") 
         b = 1  
